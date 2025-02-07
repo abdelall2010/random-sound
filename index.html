@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Random Sound - موقع لتشغيل أصوات عشوائية ممتعة. اكتشف مجموعة متنوعة من الأصوات المثيرة والمريحة."
+    />
+    <meta
+      name="keywords"
+      content="أصوات عشوائية, Random Sound, أصوات ممتعة, تشغيل أصوات"
+    />
+    <meta name="author" content="Random Sound" />
+    <link rel="icon" href="ايقونه الموقع.ico" type="image/x-icon" />
+    <title>Random Sound - أصوات عشوائية ممتعة</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f3f4f6;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        margin-top: 20px;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.2s ease;
+      }
+      .btn:hover {
+        background-color: #45a049;
+      }
+      #searchBox {
+        padding: 8px;
+        font-size: 18px;
+        margin-top: 20px;
+        border: 2px solid #4caf50;
+        border-radius: 5px;
+        width: 80%;
+        max-width: 400px;
+      }
+      #searchMessage {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #fff;
+        font-weight: bold;
+        background-color: #e74c3c;
+        padding: 10px;
+        border-radius: 5px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+      }
+      .show-message {
+        opacity: 1;
+        visibility: visible;
+      }
+      .fun-message {
+        font-size: 20px;
+        color: #ff5733;
+        font-weight: bold;
+        animation: colorChange 2s infinite alternate;
+      }
+      @keyframes colorChange {
+        0% {
+          color: #ff5733;
+        }
+        100% {
+          color: #34eb83;
+        }
+      }
+
+      /* تأثير الزرار */
+      .right-triangle {
+        width: 0;
+        height: 0;
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+        border-left: 60px solid red; /* جعل المثلث متجهًا لليمين */
+        margin: 20px auto;
+      }
+
+      .black-rectangle {
+        width: 150px;
+        height: 50px;
+        background-color: black;
+        margin: 20px auto;
+      }
+
+      .white-rectangle {
+        width: 150px;
+        height: 50px;
+        background-color: white;
+        margin: 20px auto;
+        border: 2px solid black;
+      }
+
+      .green-rectangle {
+        width: 150px;
+        height: 50px;
+        background-color: green;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Random Sound - أصوات عشوائية ممتعة</h1>
+    <h2>استمتع بأصوات عشوائية متنوعة</h2>
+    <button class="btn" id="soundButton">
+      <div id="buttonShape" class="right-triangle"></div>
+    </button>
+
+    <br /><br />
+    <input type="text" id="searchBox" placeholder="ابحث عن رقم من 0 إلى 50" />
+    <button class="btn" id="searchButton"><span>🔍</span> بحث</button>
+    <p id="searchMessage"></p>
+
+    <script>
+      // قائمة الأصوات - 50 صوت
+      const sounds = [
+        { id: 1, src: "1.mp3" },
+        { id: 2, src: "2.mp3" },
+        { id: 3, src: "3.mp3" },
+        { id: 4, src: "4.mp3" },
+        { id: 5, src: "5.mp3" },
+        { id: 6, src: "6.mp3" },
+        { id: 7, src: "7.mp3" },
+        { id: 8, src: "8.mp3" },
+        { id: 9, src: "9.mp3" },
+        { id: 10, src: "10.mp3" },
+        { id: 11, src: "11.mp3" },
+        { id: 12, src: "12.mp3" },
+        { id: 13, src: "13.mp3" },
+        { id: 14, src: "14.mp3" },
+        { id: 15, src: "15.mp3" },
+        { id: 16, src: "16.mp3" },
+        { id: 17, src: "17.mp3" },
+        { id: 18, src: "18.mp3" },
+        { id: 19, src: "19.mp3" },
+        { id: 20, src: "20.mp3" },
+        { id: 21, src: "21.mp3" },
+        { id: 22, src: "22.mp3" },
+        { id: 23, src: "23.mp3" },
+        { id: 24, src: "24.mp3" },
+        { id: 25, src: "25.mp3" },
+        { id: 26, src: "26.mp3" },
+        { id: 27, src: "27.mp3" },
+        { id: 28, src: "28.mp3" },
+        { id: 29, src: "29.mp3" },
+        { id: 30, src: "30.mp3" },
+        { id: 31, src: "31.mp3" },
+        { id: 32, src: "32.mp3" },
+        { id: 33, src: "33.mp3" },
+        { id: 34, src: "34.mp3" },
+        { id: 35, src: "35.mp3" },
+        { id: 36, src: "36.mp3" },
+        { id: 37, src: "37.mp3" },
+        { id: 38, src: "38.mp3" },
+        { id: 39, src: "39.mp3" },
+        { id: 40, src: "40.mp3" },
+        { id: 41, src: "41.mp3" },
+        { id: 42, src: "42.mp3" },
+        { id: 43, src: "43.mp3" },
+        { id: 44, src: "44.mp3" },
+        { id: 45, src: "45.mp3" },
+        { id: 46, src: "46.mp3" },
+        { id: 47, src: "47.mp3" },
+        { id: 48, src: "48.mp3" },
+        { id: 49, src: "49.mp3" },
+        { id: 50, src: "50.mp3" },
+      ];
+
+      // أصوات خاصة للكلمات "leonides" و "ملل"
+      const specialSounds = {
+        leonides: "كلمه السر leondes.mp3",
+        ملل: "كلمه السرر ملل.mp3",
+      };
+
+      let currentAudio = null; // متغير لتخزين الصوت الحالي
+
+      // تشغيل الصوت
+      function playSound(soundSrc) {
+        if (currentAudio) {
+          currentAudio.pause(); // إيقاف الصوت الحالي
+          currentAudio.currentTime = 0; // إعادة الصوت للبداية
+        }
+        currentAudio = new Audio(soundSrc); // تحميل الصوت الجديد
+        currentAudio.play(); // تشغيل الصوت الجديد
+      }
+
+      // التعامل مع البحث عند الضغط على "Enter" أو الزر المكبر
+      function handleSearch() {
+        const inputValue = document
+          .getElementById("searchBox")
+          .value.trim()
+          .toLowerCase();
+        const messageElement = document.getElementById("searchMessage");
+
+        // إخفاء الرسالة إذا كانت تظهر
+        messageElement.classList.remove("show-message");
+
+        // إذا كانت الكلمة "leonides" أو "ملل"
+        if (specialSounds[inputValue]) {
+          playSound(specialSounds[inputValue]);
+          messageElement.textContent = `تم تشغيل الصوت الخاص بـ "${inputValue}"`;
+          messageElement.classList.add("show-message");
+          messageElement.classList.add("fun-message"); // عشوائية مرحة
+        }
+        // إذا كان الرقم صحيحاً من 0 إلى 50
+        else if (!isNaN(inputValue) && inputValue >= 0 && inputValue <= 50) {
+          const sound = sounds.find((s) => s.id === Number(inputValue));
+          if (sound) {
+            playSound(sound.src);
+          }
+          messageElement.textContent = "";
+          messageElement.classList.remove("show-message");
+        }
+        // إذا كان الرقم أكبر من 50
+        else if (!isNaN(inputValue) && inputValue > 50) {
+          document.getElementById("searchBox").value = ""; // إعادة تعيين المربع
+          messageElement.textContent = "أدخل رقم أقل من أو يساوي 50";
+          messageElement.classList.add("show-message");
+        }
+        // في حالة عدم تطابق أي من الأوامر
+        else {
+          messageElement.textContent = "أدخل كلمة صحيحة!";
+          messageElement.classList.add("show-message");
+        }
+      }
+
+      // تشغيل صوت عشوائي عند الضغط على الزر
+      document.getElementById("soundButton").addEventListener("click", () => {
+        const randomIndex = Math.floor(Math.random() * sounds.length);
+        const randomSound = sounds[randomIndex];
+        playSound(randomSound.src);
+      });
+
+      // إضافة حدث عند الضغط على زر البحث
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", handleSearch);
+
+      // إضافة حدث عند الضغط على "Enter"
+      document
+        .getElementById("searchBox")
+        .addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            handleSearch();
+          }
+        });
+
+      // تغييرات الزر العشوائي (مثلث أحمر، مستطيل أسود، أبيض، أخضر)
+      let buttonState = 0;
+      setInterval(() => {
+        const buttonShape = document.getElementById("buttonShape");
+
+        switch (buttonState) {
+          case 0:
+            buttonShape.className = "right-triangle";
+            buttonState++;
+            break;
+          case 1:
+            buttonShape.className = "black-rectangle";
+            buttonState++;
+            break;
+          case 2:
+            buttonShape.className = "white-rectangle";
+            buttonState++;
+            break;
+          case 3:
+            buttonShape.className = "green-rectangle";
+            buttonState = 0;
+            break;
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
